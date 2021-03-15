@@ -1,5 +1,6 @@
 <?php
 require './lib/JSONReader.php';
+require './lib/bootstrapColor.php';
 
 $elenco=JSONReader('./dataset/TaskList.json');
 
@@ -74,11 +75,11 @@ $elenco=JSONReader('./dataset/TaskList.json');
                         $status = $task['status'];
                         $taskName = $task['taskName'];
                         $date= $task['expirationDate'];
-                     
+                   
                 ?>
                     <td><?= $taskName ?> </td>
                     <td class="text-center">
-                        <span class="badge bg-secondary text-uppercase"><?= $status ?></span>
+                        <span class="badge bg-<?=getColor($status) ?> text-uppercase"><?= $status ?></span>
                     </td>
               
                     <td class="text-nowrap">
