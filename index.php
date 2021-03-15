@@ -20,7 +20,7 @@ $elenco=JSONReader('./dataset/TaskList.json');
             <h1 class="display-1">Tasklist</h1>
         </div>
     </div>
- 
+ <form action="index.php">
     <div class="container">
         <div class="input-group pb-3 my-1">
             <label class="w-100 pb-1 fw-bold" for="searchText">Cerca</label>
@@ -58,7 +58,7 @@ $elenco=JSONReader('./dataset/TaskList.json');
                     <th class="text-center">stato</th>
                     <th class="text-center">data</th>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td>Comprare il latte</td>
                     <td class="text-center">
                         <span class="badge bg-danger text-uppercase">todo</span>
@@ -66,30 +66,32 @@ $elenco=JSONReader('./dataset/TaskList.json');
                     <td class="text-nowrap">
                         3 Luglio
                     </td>
-                </tr>
+                </tr>-->
                 <tr>
-                    <td>Comprare la farina</td>
+                <?php 
+                    foreach ($elenco as $key => $task) { 
+                    
+                        $status = $task['status'];
+                        $taskName = $task['taskName'];
+                        $date= $task['expirationDate'];
+                     
+                ?>
+                    <td><?= $taskName ?> </td>
                     <td class="text-center">
-                        <span class="badge bg-secondary text-uppercase">done</span>
+                        <span class="badge bg-secondary text-uppercase"><?= $status ?></span>
                     </td>
+              
                     <td class="text-nowrap">
-                        20 Settembre
+                    <?= $date ?>
                     </td>
                 </tr>
+                <?php } ?>
                 <tr>
-                    <td>Comprare la farina</td>
-                    <td class="text-center">
-                        <span class="badge bg-primary text-uppercase">progress</span>
-                    </td>
-                    <td class="text-nowrap">
-                        18 Settembre
-                    </td>
-                </tr>
             </table>
 
         </section>
     </div>
-
+    </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>
