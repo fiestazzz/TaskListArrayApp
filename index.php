@@ -1,8 +1,28 @@
 <?php
 require './lib/JSONReader.php';
 require './lib/bootstrapColor.php';
+require './lib/searchFunctions.php';
+require './lib/radio-button.php';
 
 $elenco=JSONReader('./dataset/TaskList.json');
+
+if (isset($_GET['searchText'])&& trim($_GET['searchText']) !== '')
+{
+    $searchText=trim(filter_var($_GET['searchText'] , FILTER_SANITIZE_STRING));
+    $elenco = searchText($searchText , $elenco);
+
+}
+else
+{
+    $searchText='';
+}
+
+
+if (isset($_GET['status']))
+{
+    $stato=$_GET['status'];
+    $elenco = array_filter($elenco , searchStatus($stato));
+}
 
 ?>
 <!DOCTYPE html>
@@ -25,28 +45,28 @@ $elenco=JSONReader('./dataset/TaskList.json');
     <div class="container">
         <div class="input-group pb-3 my-1">
             <label class="w-100 pb-1 fw-bold" for="searchText">Cerca</label>
-            <input id="searchText"  type="text" class="form-control" placeholder="attività da cercare">
+            <input id="searchText"  type="text" value="<?= $searchText?>" name="searchText" class="form-control" placeholder="attività da cercare">
             <div class="input-group-append">
-              <button class="btn btn-primary" type="button">Invia</button>
+              <button class="btn btn-primary" type="submit">Invia</button>
             </div>
         </div>
 
         <div id="status-radio" class=" mb-3">
             <div class="fw-bold pe-2 w-100">Stato attività</div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" value="option1">
+                <input class="form-check-input" id="all" type="radio" value="all" name="status">
                 <label class="form-check-label" >tutti</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"   value="option1">
+                <input class="form-check-input" type="radio"   value="todo" name="status" >
                 <label class="form-check-label" >da fare</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"   value="option2">
+                <input class="form-check-input" type="radio"   value="progress" name="status" >
                 <label class="form-check-label" >in lavorazione</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"   value="option2">
+                <input class="form-check-input" type="radio"   value="done" name="status" >
                 <label class="form-check-label" >fatto</label>
               </div>
         </div>

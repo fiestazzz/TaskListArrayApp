@@ -3,9 +3,15 @@
  * Funzione di ordine superiore funzione che restituisce una funzione
  * Programmazione Funzionale - dichiarativo 
  */
-function searchText($searchText) {
-    
-   
+function searchText($searchText , $tasklist) {
+    $trovato = [];
+    foreach ($tasklist as $item) {
+       if (strpos($item['taskName'] , $searchText) !== false)
+       {
+           $trovato[]=$item;
+       }
+    }
+    return $trovato;
 }
 
 /**
@@ -14,7 +20,20 @@ function searchText($searchText) {
  * @return callable La funzione che verrà utilizzata da array_filter
  */
 function searchStatus(string $status) : callable {
-    
-} 
+
+    return function ($tasklist) use ($status)
+    {
+        if ($status === "all")
+        {
+            return $tasklist;
+        }
+        else 
+        {
+            return strpos($tasklist['status'] , $status) !== false;
+        }
+    };
+}
+
+?>
 
 
