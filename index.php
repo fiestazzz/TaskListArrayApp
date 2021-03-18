@@ -9,7 +9,7 @@ $elenco=JSONReader('./dataset/TaskList.json');
 if (isset($_GET['searchText'])&& trim($_GET['searchText']) !== '')
 {
     $searchText=trim(filter_var($_GET['searchText'] , FILTER_SANITIZE_STRING));
-    $elenco = searchText($searchText , $elenco);
+    $elenco=array_filter($elenco ,searchText($searchText));
 
 }
 else
@@ -23,6 +23,7 @@ if (isset($_GET['status']))
     $stato=$_GET['status'];
     $elenco = array_filter($elenco , searchStatus($stato));
 }
+
 
 ?>
 <!DOCTYPE html>

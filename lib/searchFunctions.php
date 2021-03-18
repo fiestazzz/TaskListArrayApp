@@ -3,16 +3,15 @@
  * Funzione di ordine superiore funzione che restituisce una funzione
  * Programmazione Funzionale - dichiarativo 
  */
-function searchText($searchText , $tasklist) {
-    $trovato = [];
-    foreach ($tasklist as $item) {
-       if (strpos($item['taskName'] , $searchText) !== false)
-       {
-           $trovato[]=$item;
-       }
-    }
-    return $trovato;
+function searchText($searchText)
+{
+    return function($taskItem) use ($searchText)
+    {
+        $result=stripos($taskItem['taskName'], $searchText) !==false;
+        return $result;
+    };
 }
+
 
 /**
  * @var string $status è la stringa che corrisponde allo status da cercare
@@ -21,15 +20,15 @@ function searchText($searchText , $tasklist) {
  */
 function searchStatus(string $status) : callable {
 
-    return function ($tasklist) use ($status)
+    return function ($task) use ($status)
     {
         if ($status === "all")
         {
-            return $tasklist;
+            return $task;
         }
         else 
         {
-            return strpos($tasklist['status'] , $status) !== false;
+            return strpos($task['status'] , $status) !== false;
         }
     };
 }
