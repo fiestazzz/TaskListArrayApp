@@ -1,6 +1,6 @@
 <?php
 
-function getColor(string $status)
+function getColor( $status)
 {
     if ($status === 'progress')
     {
