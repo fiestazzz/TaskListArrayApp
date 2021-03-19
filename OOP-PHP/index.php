@@ -6,6 +6,7 @@ $tasklist = JSONReader('./dataset/TaskList.json');
 
 //print_r($tasklist);
 
+//paradigma imperativo
 $taskListObj =[];
 foreach ($tasklist as $taskArray) {
     $taskObj = new Task();
@@ -17,7 +18,16 @@ foreach ($tasklist as $taskArray) {
     $taskListObj[]=$taskObj;
 }//abbiamo creato un array fatto di oggetti creati dal ciclo
 
-//print_r($taskListObj);
+
+//paradigma dichiarativo
+/*$taskListObj= array_map(function($taskArray){
+    $taskObj = new Task();
+    $taskObj->id=$taskArray['id'];
+    $taskObj->taskname=$taskArray['taskName'];
+    $taskObj->status=$taskArray['status'];
+    $taskObj->expirationDate=$taskArray['expirationDate'];
+    return $taskObj;
+}, $tasklist)    //abbiamo creato un array fatto di oggetti creati da array_map*/
 ?>
 
 
