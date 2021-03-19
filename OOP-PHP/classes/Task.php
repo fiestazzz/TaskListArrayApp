@@ -4,7 +4,7 @@ class Task {
     public $id ;
     public $taskName;
     public $status;
-    public $expirationDate;
+    public $ExpirationDate;
 
     public function isExpired():bool
     {
@@ -18,7 +18,7 @@ class Task {
 
     public function getExpirationDate()
     {
-       return $this->expirationDate;
+       return $this->ExpirationDate;
     }
 }
 
