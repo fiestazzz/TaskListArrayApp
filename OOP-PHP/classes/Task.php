@@ -5,19 +5,14 @@ class Task {
     public $taskName;
     public $status;
     public $ExpirationDate;
+    public $ora;
 
     public function isExpired():bool
     {
-        date_default_timezone_set('Europe/Rome');
-        //istanza della classe DateTime
-       /* $todaysDate = new DateTime();
-        $timeStampToday= $todaysDate->getTimestamp();
-        $task= new DateTime($this->ExpirationDate);
-        $timeStampTask=$task->getTimestamp();*/
-        //return $timeStampTask < $timeStampToday;
+        //date_default_timezone_set('Europe/Rome');
         $oggi=new DateTime();
         $oggiTimeStamp=$oggi->getTimestamp();
-        $dataTask=new DateTime($this->ExpirationDate);
+        $dataTask=new DateTime($this->ExpirationDate.'T23:59:59' );
         $dataTaskTimeStamp=$dataTask->getTimestamp();
 
         return $oggiTimeStamp > $dataTaskTimeStamp;
