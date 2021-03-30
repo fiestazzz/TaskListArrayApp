@@ -5,30 +5,29 @@ class Task {
     public $taskName;
     public $status;
     public $ExpirationDate;
-    public $ora;
 
-    public function isExpired(DateTime $expiration):bool
+    public function isExpired(DateTime $Expiration):bool
     {
-        try {
-            
-            
-            $task = new DateTime($this->expirationDate); 
-         
+        try 
+        {
+            $task = new DateTime($this->ExpirationDate); 
             // non è oggi
-            if($expiration->format('Ymd') === $task->format('Ymd')){
+            if($Expiration->format('Ymd') === $task->format('Ymd'))
+            {
                 return false;
             }
-            return $expiration->getTimestamp() > $task->getTimestamp(); 
+            return $Expiration->getTimestamp() > $task->getTimestamp(); 
             
-        } catch (\Throwable $th) {
+        } catch (\Throwable $th) 
+        {
             return $th;
-        
+        }
+  
     }
 
-    public function getExpirationDate()
+    public function getExpirationDate() 
     {
        return $this->ExpirationDate;
     }
 }
-
 ?>
