@@ -7,15 +7,21 @@ class Task {
     public $ExpirationDate;
     public $ora;
 
-    public function isExpired():bool
+    public function isExpired(DateTime $expiration):bool
     {
-        //date_default_timezone_set('Europe/Rome');
-        $oggi=new DateTime();
-        $oggiTimeStamp=$oggi->getTimestamp();
-        $dataTask=new DateTime($this->ExpirationDate.'T23:59:59' );
-        $dataTaskTimeStamp=$dataTask->getTimestamp();
-
-        return $oggiTimeStamp > $dataTaskTimeStamp;
+        try {
+            
+            
+            $task = new DateTime($this->expirationDate); 
+         
+            // non è oggi
+            if($expiration->format('Ymd') === $task->format('Ymd')){
+                return false;
+            }
+            return $expiration->getTimestamp() > $task->getTimestamp(); 
+            
+        } catch (\Throwable $th) {
+            return $th;
         
     }
 
